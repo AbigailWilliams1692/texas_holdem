@@ -68,7 +68,6 @@ class Card(CardBase):
 
     def __init__(self, suit: str, rank: str):
         super().__init__(suit, rank)
-        assert self.validate(), f"Card {self.__repr__()} is invalid."
 
     def __str__(self):
         return f"{self.get_suit}{self.get_rank}"
