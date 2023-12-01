@@ -75,6 +75,9 @@ class Card(CardBase):
     def __repr__(self):
         return f"{self.get_suit}{self.get_rank}"
 
+    def __eq__(self, other):
+        return self.get_suit == other.get_suit and self.get_rank == other.get_rank
+
     #######################################################################
     # Instance methods
     #######################################################################
