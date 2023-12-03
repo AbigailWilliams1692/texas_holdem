@@ -1,6 +1,6 @@
 ###################################################
 # @project: Texas Hold'em
-# @file description: Deck class
+# @file description: Texas Deck class
 # @author: Abigail W
 # @created on: 2023-09-21
 # @last updated: 2023-09-22

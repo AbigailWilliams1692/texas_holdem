@@ -18,6 +18,7 @@ import numpy as np
 
 # Customized Packages
 from resources.src.card.Card import Card
+from resources.src.card.Hand import Hand
 from resources.src.pattern.Pattern import Pattern
 
 
@@ -34,15 +35,15 @@ class FullHouse(Pattern, ABC):
     rank_counts_benchmark = [2, 3]
 
     @classmethod
-    def isInstanceOf(cls, list_of_cards: list[Card]) -> bool:
+    def isInstanceOf(cls, hand: Hand) -> bool:
         """
         判断list_of_cards是否为葫芦牌型，是则返回True，否则返回False。
 
-        :param list_of_cards: list[Card]类对象，判定的对象
+        :param hand: Hand类对象，判定的对象
         :return: True/False
         """
         # 用Counter类型对手牌进行计数
-        ranks = [card.get_rank for card in list_of_cards]
+        ranks = hand.getRanks()
         rank_counts = Counter(ranks)
 
         # 如果计数结果中存在一个rank恰好有3张牌，另一个rank恰好有2张牌，则判定为葫芦（使用最谨慎的判断方法）
@@ -52,15 +53,15 @@ class FullHouse(Pattern, ABC):
         return False
 
     @classmethod
-    def getHandValue(cls, list_of_cards: list[Card]) -> np.ndarray:
+    def getHandValueHelper(cls, hand: Hand) -> np.ndarray:
         """
         判断一手符合该牌型的牌的价值序列。
 
-        :param list_of_cards: list[Card]，判定的对象
+        :param hand: Hand，判定的对象
         :return: np.ndarray, an array of the values of the list of cards, from Major to Minor.
         """
         # 用Counter类型对手牌进行计数
-        ranks = [card.get_rank for card in list_of_cards]
+        ranks = hand.getRanks()
         rank_counts = Counter(ranks)
 
         # 记录手牌的价值

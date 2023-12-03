@@ -1,9 +1,9 @@
 ###################################################
 # @project: Texas Hold'em
-# @file description: Card class
+# @file description: Test Card Class
 # @author: Abigail W
 # @created on: 2023-11-30
-# @last updated: 2023-11-30
+# @last updated: 2023-12-02
 ###################################################
 
 ###################################################
@@ -17,7 +17,9 @@ from resources.src.card.Card import Card
 
 
 class TestingCard(unittest.TestCase):
-
+    """
+    测试扑克牌类
+    """
     def test_set_up_card(self):
         # 测试生成一张牌
         card1 = Card(suit="♥", rank="A")

@@ -16,7 +16,6 @@
 
 # Customized Packages
 from resources.src.card.Card import Card
-from resources.src.pattern.Pattern import Pattern
 
 
 class Hand:
@@ -40,7 +39,7 @@ class Hand:
     # Initialization
     #######################################################################
     def __init__(self, cards: list[Card]) -> None:
-        assert self.get_size == len(cards), f"手牌长度错误！设置长度为{self.get_size}，输入长度为{len(cards)}。"
+        assert self.get_size == len(cards), f"手牌数量错误！设置数量为{self.get_size}张，输入数量为{len(cards)}张。"
         self.__cards = cards
         self.__pattern = None
 
@@ -49,6 +48,9 @@ class Hand:
 
     def __repr__(self):
         return f"Hand [{id(self)}] [{self.get_size} cards] {self.get_cards}"
+
+    def __len__(self):
+        return len(self.get_cards)
 
     #######################################################################
     # Getter & Setter methods
@@ -101,10 +103,3 @@ class Hand:
         :return: value of the cards in a hand, a list of integers
         """
         return [card.valueOfCard(purpose=purpose) for card in self.get_cards]
-
-    def calculatePattern(self) -> Pattern:
-        """
-        判断这一手牌属于什么牌型，返回牌型的类名。
-
-        :return: Pattern类
-        """

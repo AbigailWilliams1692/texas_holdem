@@ -14,10 +14,8 @@ from abc import ABC
 from collections import Counter
 
 # Third-Party Packages
-import numpy as np
 
 # Customized Packages
-from resources.src.card.Card import Card
 from resources.src.card.Hand import Hand
 from resources.src.pattern.Pattern import Pattern
 from resources.src.pattern.Straight import Straight
@@ -36,30 +34,30 @@ class HighCard(Pattern, ABC):
     rank_counts_benchmark = [1, 1, 1, 1, 1]
 
     @classmethod
-    def isInstanceOf(cls, list_of_cards: list[Card]) -> bool:
+    def isInstanceOf(cls, hand: Hand) -> bool:
         """
         判断hand是否为一对牌型，是则返回True，否则返回False。
 
-        :param list_of_cards: list[Card]类对象，判定的对象
+        :param hand: Hand类对象，判定的对象
         :return: True/False
         """
         # 用Counter类型对手牌进行计数
-        ranks = [card.get_rank for card in list_of_cards]
+        ranks = hand.getRanks()
         rank_counts = Counter(ranks)
 
         # 如果计数结果中存在1个rank恰好各有2张牌，另有3张不同rank的牌，则判定为一对
-        if sorted(rank_counts.values()) == cls.rank_counts_benchmark and (not Straight.isInstanceOf(list_of_cards)):
+        if sorted(rank_counts.values()) == cls.rank_counts_benchmark and (not Straight.isInstanceOf(hand)):
             return True
 
         return False
 
     @classmethod
-    def getHandValue(cls, list_of_cards: list[Card]) -> np.ndarray:
+    def getHandValueHelper(cls, hand: Hand) -> list:
         """
         判断一手符合该牌型的牌的价值序列。
 
-        :param list_of_cards: list[Card]，判定的对象
-        :return: np.ndarray, an array of the values of the list of cards, from Major to Minor.
+        :param hand: Hand，判定的对象
+        :return: a list of the values of the list of cards, from Major to Minor.
         """
-        major_value = max([card.valueOfCard(purpose="high") for card in list_of_cards])
-        return np.array([major_value, 0])
+        major_value = max(hand.getValues(purpose="high"))
+        return [major_value, 0]

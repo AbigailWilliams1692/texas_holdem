@@ -1,9 +1,9 @@
 ###################################################
 # @project: Texas Hold'em
-# @file description: Card class
+# @file description: Test Texas Deck Class
 # @author: Abigail W
-# @created on: 2023-11-30
-# @last updated: 2023-11-30
+# @created on: 2023-12-02
+# @last updated: 2023-12-02
 ###################################################
 
 ###################################################
@@ -20,9 +20,9 @@ from resources.src.card.Card import Card
 from resources.src.card.TexasDeck import TexasDeck
 
 
-class TestingDeck(unittest.TestCase):
+class TestingTexasDeck(unittest.TestCase):
     """
-    牌堆类
+    测试牌堆类
     """
     def test_set_up(self):
         # 测试生成一副扑克牌
