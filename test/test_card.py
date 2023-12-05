@@ -13,7 +13,7 @@
 import unittest
 
 # Customized Packages
-from resources.src.card.Card import Card
+from game.src.card.Card import Card
 
 
 class TestingCard(unittest.TestCase):

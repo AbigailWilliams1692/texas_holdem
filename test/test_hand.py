@@ -15,8 +15,8 @@ import unittest
 # Third-Party Packages
 
 # Customized Packages
-from resources.src.card.Card import Card
-from resources.src.card.Hand import Hand
+from game.src.card.Card import Card
+from game.src.card.Hand import Hand
 
 
 class TestingHand(unittest.TestCase):

@@ -16,18 +16,18 @@ import unittest
 import numpy as np
 
 # Customized Packages
-from resources.src.card.Card import Card
-from resources.src.card.Hand import Hand
-from resources.src.pattern.Pattern import Pattern
-from resources.src.pattern.StraightFlush import StraightFlush
-from resources.src.pattern.FourOfAKind import FourOfAKind
-from resources.src.pattern.FullHouse import FullHouse
-from resources.src.pattern.Flush import Flush
-from resources.src.pattern.Straight import Straight
-from resources.src.pattern.ThreeOfAKind import ThreeOfAKind
-from resources.src.pattern.TwoPairs import TwoPairs
-from resources.src.pattern.OnePair import OnePair
-from resources.src.pattern.HighCard import HighCard
+from game.src.card.Card import Card
+from game.src.card.Hand import Hand
+from game.src.pattern.Pattern import Pattern
+from game.src.pattern.StraightFlush import StraightFlush
+from game.src.pattern.FourOfAKind import FourOfAKind
+from game.src.pattern.FullHouse import FullHouse
+from game.src.pattern.Flush import Flush
+from game.src.pattern.Straight import Straight
+from game.src.pattern.ThreeOfAKind import ThreeOfAKind
+from game.src.pattern.TwoPairs import TwoPairs
+from game.src.pattern.OnePair import OnePair
+from game.src.pattern.HighCard import HighCard
 
 
 class TestingPatterns(unittest.TestCase):

@@ -15,7 +15,7 @@
 # Third-Party Packages
 
 # Customized Packages
-from resources.src.card.Card import Card
+from game.src.card.Card import Card
 
 
 class Hand:

@@ -12,7 +12,7 @@
 import numpy as np
 
 # Customized Packages
-from resources.src.card.Card import Card
+from game.src.card.Card import Card
 
 
 class TexasDeck(object):

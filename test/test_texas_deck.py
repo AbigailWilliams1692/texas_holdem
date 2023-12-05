@@ -16,8 +16,8 @@ import unittest
 import numpy as np
 
 # Customized Packages
-from resources.src.card.Card import Card
-from resources.src.card.TexasDeck import TexasDeck
+from game.src.card.Card import Card
+from game.src.card.TexasDeck import TexasDeck
 
 
 class TestingTexasDeck(unittest.TestCase):

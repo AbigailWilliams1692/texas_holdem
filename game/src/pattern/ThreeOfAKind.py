@@ -16,9 +16,9 @@ from collections import Counter
 # Third-Party Packages
 
 # Customized Packages
-from resources.src.card.Card import Card
-from resources.src.card.Hand import Hand
-from resources.src.pattern.Pattern import Pattern
+from game.src.card.Card import Card
+from game.src.card.Hand import Hand
+from game.src.pattern.Pattern import Pattern
 
 
 class ThreeOfAKind(Pattern, ABC):
@@ -57,19 +57,19 @@ class ThreeOfAKind(Pattern, ABC):
         判断一手符合该牌型的牌的价值序列。
 
         :param hand: Hand，判定的对象
-        :return: a list of the values of the list of cards, from Major to Minor.
+        :return: a list of the values of the list of cards, from Pattern Value to Major to Minor.
         """
         # 用Counter类型对手牌进行计数
         ranks = hand.getRanks()
         rank_counts = Counter(ranks)
 
         # 记录手牌的价值
-        major_value, minor_value = 0, 0
+        major_values, minor_values = [], []
         for rank, count in rank_counts.items():
             temp = Card.convertRankToValue(rank=rank, purpose="high")
             if count == 3:
-                major_value = temp if temp > major_value else major_value
-            elif count == 1:
-                minor_value = temp if temp > minor_value else minor_value
+                major_values.append(temp)
+            else:
+                minor_values.append(temp)
 
-        return [major_value, minor_value]
+        return [cls.value] + major_values + sorted(minor_values, reverse=True)

@@ -17,9 +17,9 @@ from collections import Counter
 import numpy as np
 
 # Customized Packages
-from resources.src.card.Card import Card
-from resources.src.card.Hand import Hand
-from resources.src.pattern.Pattern import Pattern
+from game.src.card.Card import Card
+from game.src.card.Hand import Hand
+from game.src.pattern.Pattern import Pattern
 
 
 class Straight(Pattern, ABC):
@@ -77,20 +77,20 @@ class Straight(Pattern, ABC):
         判断一手符合该牌型的牌的价值序列。
 
         :param hand: Hand，判定的对象
-        :return: a list of the values of the list of cards, from Major to Minor.
+        :return: a list of the values of the list of cards, from Pattern Value to Major to Minor.
         """
         # 获得手牌的点数
         ranks = hand.getRanks()
 
         # 分两种情况，有A和没有A的
         if "A" in ranks:
-            card_values_sorted_high = sorted([Card.convertRankToValue(rank=rank, purpose="high") for rank in ranks])
-            card_values_sorted_low = sorted([Card.convertRankToValue(rank=rank, purpose="low") for rank in ranks])
+            card_values_sorted_high = sorted([Card.convertRankToValue(rank=rank, purpose="high") for rank in ranks], reverse=True)
+            card_values_sorted_low = sorted([Card.convertRankToValue(rank=rank, purpose="low") for rank in ranks], reverse=True)
             if cls.isContinuous(card_values_sorted_high):
-                major_value = max(card_values_sorted_high)
+                ordered_values = card_values_sorted_high
             else:
-                major_value = max(card_values_sorted_low)
+                ordered_values = card_values_sorted_low
         else:
-            major_value = max(hand.getValues(purpose="high"))
+            ordered_values = sorted(hand.getValues(purpose="high"), reverse=True)
 
-        return [major_value, 0]
+        return [cls.value] + ordered_values

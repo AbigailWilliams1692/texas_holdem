@@ -18,10 +18,10 @@ from collections import Counter
 import numpy as np
 
 # Customized Packages
-from resources.src.card.Hand import Hand
-from resources.src.pattern.Pattern import Pattern
-from resources.src.pattern.Flush import Flush
-from resources.src.pattern.Straight import Straight
+from game.src.card.Hand import Hand
+from game.src.pattern.Pattern import Pattern
+from game.src.pattern.Flush import Flush
+from game.src.pattern.Straight import Straight
 
 
 class StraightFlush(Pattern, ABC):
@@ -50,11 +50,11 @@ class StraightFlush(Pattern, ABC):
         return False
 
     @classmethod
-    def getHandValueHelper(cls, hand: Hand) -> np.ndarray:
+    def getHandValueHelper(cls, hand: Hand) -> list:
         """
         判断一手符合该牌型的牌，主要价值为多少。例如，Full House牌型中三条的rank决定了这副牌的主要价值。
 
         :param hand: Hand类对象，判定的对象
-        :return: int, the major value of the list_of_card
+        :return: a list of the values of the list of cards, from Pattern Value to Major to Minor.
         """
-        return Straight.getHandValue(hand)
+        return Straight.getHandValueHelper(hand)

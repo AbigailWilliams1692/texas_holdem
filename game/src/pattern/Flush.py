@@ -17,8 +17,8 @@ from collections import Counter
 # Third-Party Packages
 
 # Customized Packages
-from resources.src.card.Hand import Hand
-from resources.src.pattern.Pattern import Pattern
+from game.src.card.Hand import Hand
+from game.src.pattern.Pattern import Pattern
 
 
 class Flush(Pattern, ABC):
@@ -52,12 +52,12 @@ class Flush(Pattern, ABC):
         return False
 
     @classmethod
-    def getHandValueHelper(cls, hand: Hand) -> dict:
+    def getHandValueHelper(cls, hand: Hand) -> list:
         """
         判断一手符合该牌型的牌的价值序列。
 
         :param hand: Hand，判定的对象
-        :return: a dictionary of te values of the cards; keys: Patter, Major, Minor
+        :return: a list of te values of the cards,
         """
-        major_value = max(hand.getValues(purpose="high"))
-        return {"pattern": cls.value, "major": major_value, "minor": 0}
+        ordered_values = sorted(hand.getValues(purpose="high"), reverse=True)
+        return [cls.value] + ordered_values
