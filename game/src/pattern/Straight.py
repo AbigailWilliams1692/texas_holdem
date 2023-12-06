@@ -42,7 +42,7 @@ class Straight(Pattern, ABC):
         :param arr: a list of increasing integers with interval 1.
         :return: True or False
         """
-        return all([(arr[i] + 1) == arr[i + 1] for i in range(len(arr) - 1)])
+        return all([(arr[i] - 1) == arr[i + 1] for i in range(len(arr) - 1)])
 
     @classmethod
     def isInstanceOf(cls, hand: Hand) -> bool:
@@ -62,11 +62,11 @@ class Straight(Pattern, ABC):
         if sorted(rank_counts.values()) == cls.rank_counts_benchmark:
             # 获取手牌的所有数值，并按升序排列
             if "A" in ranks:
-                card_values_sorted_high = sorted([Card.convertRankToValue(rank=rank, purpose="high") for rank in ranks])
-                card_values_sorted_low = sorted([Card.convertRankToValue(rank=rank, purpose="low") for rank in ranks])
+                card_values_sorted_high = sorted([Card.convertRankToValue(rank=rank, purpose="high") for rank in ranks], reverse=True)
+                card_values_sorted_low = sorted([Card.convertRankToValue(rank=rank, purpose="low") for rank in ranks], reverse=True)
                 return cls.isContinuous(card_values_sorted_high) or cls.isContinuous(card_values_sorted_low)
             else:
-                card_values_sorted = sorted([Card.convertRankToValue(rank=rank) for rank in ranks])
+                card_values_sorted = sorted([Card.convertRankToValue(rank=rank) for rank in ranks], reverse=True)
                 return cls.isContinuous(card_values_sorted)
 
         return False

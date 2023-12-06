@@ -31,7 +31,7 @@ class TwoPairs(Pattern, ABC):
     #######################################################################
     pattern_name = "Two Pairs"
     value = 3
-    rank_counts_benchmark = [1, 1, 2]
+    rank_counts_benchmark = [1, 2, 2]
 
     @classmethod
     def isInstanceOf(cls, hand: Hand) -> bool:

@@ -57,4 +57,4 @@ class StraightFlush(Pattern, ABC):
         :param hand: Hand类对象，判定的对象
         :return: a list of the values of the list of cards, from Pattern Value to Major to Minor.
         """
-        return Straight.getHandValueHelper(hand)
+        return [cls.value] + Straight.getHandValueHelper(hand)[1:]

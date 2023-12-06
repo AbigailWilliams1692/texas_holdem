@@ -3,7 +3,7 @@
 # @file description: Pattern base class
 # @author: Abigail W
 # @created on: 2023-09-22
-# @last updated: 2023-11-30
+# @last updated: 2023-12-06
 ###################################################
 
 ###################################################
@@ -29,7 +29,7 @@ class Pattern(ABC):
     #######################################################################
     pattern_name = None
     pattern = None
-    rank: int = 0
+    value = 0
 
     #######################################################################
     # Class & Abstract methods
@@ -47,7 +47,7 @@ class Pattern(ABC):
 
     @classmethod
     @abstractmethod
-    def getHandValueHelper(cls, hand: Hand) -> dict:
+    def getHandValueHelper(cls, hand: Hand) -> list:
         """
         该方法为Helper方法。
         判断一手符合该牌型的牌，主要价值为多少。例如，Full House牌型中三条的rank决定了这副牌的主要价值。
@@ -61,7 +61,7 @@ class Pattern(ABC):
     # Class methods
     #######################################################################
     @classmethod
-    def getHandValue(cls, hand: Hand) -> dict:
+    def getHandValue(cls, hand: Hand) -> list:
         """
         判断一手符合该牌型的牌，主要价值为多少。例如，Full House牌型中三条的rank决定了这副牌的主要价值。
 
@@ -74,16 +74,19 @@ class Pattern(ABC):
             raise TypeError(f"{hand} 不属于牌型{cls.pattern_name}!")
 
     @classmethod
-    def compareAtoB(cls, A: Hand, B: Hand) -> int:
+    def getPatternName(cls) -> str:
         """
-        该方法将处在同一牌型的一手牌A与另一手牌B进行比较，并返回-1，0，1三种结果。
-        -1 代表手牌A的价值 < 手牌B的价值；
-        0 代表手牌A的价值   = 手牌B的价值；
-        1 代表手牌A的价值   >手牌B的价值。
+        该方法获取牌型的名称。
 
-        :param A: 手牌A
-        :param B: 手牌B
-        :return: int
+        :return: 牌型名称，str。
         """
-        # 判断手牌A和B都为本牌型
-        values_A, values_B = cls.get
+        return cls.pattern_name
+
+    @classmethod
+    def getPatternValue(cls) -> int:
+        """
+        该方法获取牌型的价值。
+
+        :return: 牌型价值，int。
+        """
+        return cls.value

@@ -18,6 +18,7 @@ from collections import Counter
 # Customized Packages
 from game.src.card.Hand import Hand
 from game.src.pattern.Pattern import Pattern
+from game.src.pattern.Flush import Flush
 from game.src.pattern.Straight import Straight
 
 
@@ -30,7 +31,7 @@ class HighCard(Pattern, ABC):
     # Class attributes
     #######################################################################
     pattern_name = "High Card"
-    value = 2
+    value = 1
     rank_counts_benchmark = [1, 1, 1, 1, 1]
 
     @classmethod
@@ -46,7 +47,7 @@ class HighCard(Pattern, ABC):
         rank_counts = Counter(ranks)
 
         # 如果计数结果中存在1个rank恰好各有2张牌，另有3张不同rank的牌，则判定为一对
-        if sorted(rank_counts.values()) == cls.rank_counts_benchmark and (not Straight.isInstanceOf(hand)):
+        if sorted(rank_counts.values()) == cls.rank_counts_benchmark and (not Straight.isInstanceOf(hand)) and (not Flush.isInstanceOf(hand)):
             return True
 
         return False

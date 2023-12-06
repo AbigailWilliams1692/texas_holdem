@@ -32,11 +32,15 @@ class Hand:
     # Class methods
     #######################################################################
     @classmethod
+    def getHandSize(cls) -> int:
+        return cls.__size
+
+    @classmethod
     def setHandSize(cls, new_hand_size: int):
         cls.__size = new_hand_size
 
     #######################################################################
-    # Initialization
+    # Default methods
     #######################################################################
     def __init__(self, cards: list[Card]) -> None:
         assert self.get_size == len(cards), f"手牌数量错误！设置数量为{self.get_size}张，输入数量为{len(cards)}张。"
@@ -65,7 +69,7 @@ class Hand:
 
     @property
     def get_size(self) -> int:
-        return self.__size
+        return self.getHandSize()
 
     #######################################################################
     # Instance methods

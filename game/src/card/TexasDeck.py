@@ -26,7 +26,7 @@ class TexasDeck(object):
     number_of_cards_in_a_deck = 52
 
     #######################################################################
-    # Initialization
+    # Default methods
     #######################################################################
     def __init__(self, random_generator=np.random, list_of_cards: list[Card] = None) -> None:
         """

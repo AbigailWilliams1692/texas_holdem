@@ -26,12 +26,12 @@ class TestingHand(unittest.TestCase):
 
     def test_hand_size(self):
         # 测试默认手牌数量为5张
-        self.assertEqual(Hand.get_size, 5)
+        self.assertEqual(Hand.getHandSize(), 5)
 
     def test_set_size(self):
         # 测试修改手牌数量为6张
         Hand.setHandSize(6)
-        self.assertEqual(Hand.get_size, 6)
+        self.assertEqual(Hand.getHandSize(), 6)
         Hand.setHandSize(5)
 
     def test_set_up(self):
