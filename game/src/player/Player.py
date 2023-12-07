@@ -3,7 +3,7 @@
 # @file description: Player base class
 # @author: Abigail W
 # @created on: 2023-12-07
-# @last updated: 2023-12-07
+# @last updated: 2023-12-08
 ###################################################
 
 ###################################################
@@ -16,8 +16,8 @@ from abc import ABC, abstractmethod
 
 # Customized Packages
 from game.src.card.Card import Card
-from game.src.card.Hand import Hand
-from game.src.pattern.Pattern import Pattern
+# from game.src.card.Hand import Hand
+# from game.src.pattern.Pattern import Pattern
 
 
 class Player(ABC):
@@ -147,7 +147,9 @@ class Player(ABC):
     def setIsInTheGame(self, new_status: bool) -> None:
         self.__is_in_the_game = new_status
 
+    #######################################################################
     # Player actions
+    #######################################################################
     def fold(self) -> None:
         """
         该方法执行fold操作，放弃手牌，退出本局游戏，对self.__is_in_the_game进行修改。
@@ -157,37 +159,36 @@ class Player(ABC):
         self.resetPocket()
         self.setIsInTheGame(False)
 
-    def call(self, bet_price: float) -> None:
+    def makeABet(self, new_bet: float) -> None:
         """
-        该方法执行call操作，匹配场上的赌注价码，并完成对balance和bet的操作。
+        该方法执行bet操作，下注，对balance和bet进行操作。
 
-        :param bet_price: 场上的赌注价码,， float。
+        :param new_bet: 新下注的筹码量，float。
+        :return:
+        """
+        if new_bet < 0:
+            raise ValueError(f"新下注筹码量为{new_bet}， 下注金额不能为负数。")
+
+        self.deductBalance(new_bet)
+        self.addToBet(new_bet)
+
+    def check(self) -> None:
+        """
+        该方法执行check操作，不下注。
+
         :return: None
         """
-        # 计算当前价码和已下赌注之间的差值
-        diff_amount = max(bet_price - self.getBet(), 0)
+        self.makeABet(0)
 
-        # 对balance和bet进行操作
-        if diff_amount == 0:
-            return
-        self.deductBalance(diff_amount)
-        self.addToBet(diff_amount)
-
-    def raiseBet(self, new_bet: float, bet_price: float) -> None:
+    def raiseBet(self, new_target: float, current_price: float) -> None:
         """
-        该方法执行raise操作，下注超过场上的赌注价码。
+        该方法执行raise操作，加注，对balance和bet进行操作。
 
-        :param new_bet: 新下注的价码, float。
-        :param bet_price: 场上的赌注价码，float。
+        :param new_target: 新下注的筹码量，float。
+        :param current_price: 当前的赌注，float。
         :return: None
         """
-        # 检查新的价码必须高于场上现有的价码。
-        if new_bet <= bet_price:
-            raise ValueError(f"场上现有价码为{bet_price}，新价码为{new_bet}，新价码必须大于现有价码。")
+        if new_target <= current_price:
+            raise ValueError(f"新下注筹码量为{new_target}， 不能小于等于当前赌注{current_price}。")
 
-        # 计算当前价码和已下赌注之间的差值
-        diff_amount = max(new_bet - self.getBet(), 0)
-
-        # 对balance和bet进行操作
-        self.deductBalance(diff_amount)
-        self.addToBet(diff_amount)
+        self.makeABet(new_target - current_price)
